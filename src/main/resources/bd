@@ -1,0 +1,14 @@
+-- auto-generated definition
+create table words
+(
+    id    bigserial    not null
+        constraint words_pkey
+            primary key,
+    value varchar(255) not null
+);
+
+alter table words
+    owner to postgres;
+
+COPY words (value)
+    FROM 'D:\anagram\test.txt' DELIMITER ',';
