@@ -1,16 +1,16 @@
-package com.anagram.project.model;;
+package com.anagram.project.model;
 
 import javax.persistence.*;
 
 @Table(name = "words")
-    public class Word {
+public class Word {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Column(name = "value", nullable = false)
-        private String value;
+    @Column(name = "value", nullable = false)
+    private String value;
 
     public long getId() {
 
@@ -37,5 +37,4 @@ import javax.persistence.*;
                 ", value='" + value + '\'' +
                 '}';
     }
-
-    }
+}
