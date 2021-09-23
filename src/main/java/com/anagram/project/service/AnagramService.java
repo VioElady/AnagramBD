@@ -38,21 +38,5 @@ public class AnagramService {
         return AnagramUtil.anagrams(values);
     }
 
-
-    private HashMap<String, List<String>> findAllAnagrams(List<Word> words){
-        HashMap<String, List<String>> map = new HashMap<>();
-
-        for(Word w1 : words) {
-            List<String> outputs = new ArrayList<String>();
-            for(Word w2 : words) {
-                List<Set<String>> output = AnagramUtil.anagrams();
-                if (output != null)
-                    outputs.add(output);
-            }
-            map.put(w1.getValue(),outputs);
-        }
-
-        return map;
-    }
 }
 

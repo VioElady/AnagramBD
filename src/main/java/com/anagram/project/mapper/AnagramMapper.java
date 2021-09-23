@@ -16,5 +16,6 @@ public interface AnagramMapper {
 
     @Select("select id,value from words")
     Cursor<Word> scan();
+
 }
 
