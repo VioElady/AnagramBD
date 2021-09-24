@@ -17,7 +17,7 @@ ALTER TABLE words
     ADD COLUMN value_sort varchar(255);
 ------
 COPY words (value)
-    FROM 'D:\anagram\test.txt' DELIMITER ',';
+    FROM 'D:\anagram\test2.txt' DELIMITER ',';
 -----
 SELECT value_sort
 FROM words
@@ -40,52 +40,12 @@ CREATE TABLE IF NOT EXISTS words
 );
 
 
+-------------
 
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="AnagramsMapper">
-
-    <select id="showAll" parameterType="Anagrams" fetchSize="500" resultType="java.lang.String">
-        SELECT wordsort
-        FROM table_test
-        GROUP BY wordSort;
-    </select>
-
-    <select id="createFunction">
-        CREATE
-            OR REPLACE FUNCTION sort1(x TEXT) returns TEXT AS
-        $$
-        SELECT string_agg(c, '') as s
-        from (select unnest(regexp_split_to_array($1, '')) as c
-              order by c) as t;
-
-        $$
-            LANGUAGE sql immutable;
-    </select>
-    <select id="createTable">
-        DROP TABLE IF EXISTS table_test;
-        CREATE TABLE IF NOT EXISTS table_test
-        (
-
-            word     varchar(20),
-            wordSort varchar(20) GENERATED ALWAYS AS
-                         (
-                         sort1
-                             (
-                                 word
-                             ) ) STORED
-        );
-    </select>
-    <select id="write" resultType="java.lang.String">
-        COPY table_test(word) FROM '${path}'
-    </select>
-    <select id="anagrams" resultType="java.lang.String">
-        SELECT word
-        FROM table_test
-        WHERE wordsort = #{value}
-    </select>
-
-</mapper>
+update words
+set value_sort = alfaSort(words.value) where true;
+-----------
+SELECT value_sort
+FROM words
+GROUP BY value_sort;
+---------------

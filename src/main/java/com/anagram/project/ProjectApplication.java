@@ -1,4 +1,3 @@
-
 package com.anagram.project;
 
 import com.anagram.project.model.Word;
@@ -9,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
-import java.util.Set;
 
 @MappedTypes({Word.class})
 @MapperScan("com.anagram.project.mapper")
@@ -27,10 +23,6 @@ public class ProjectApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        List<Set<String>> anagrams = anagramService.findAnagrams();
-        System.out.println(anagrams);
+        anagramService.findAnagrams();
     }
 }
-
-
-

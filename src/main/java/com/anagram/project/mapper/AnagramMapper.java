@@ -1,21 +1,18 @@
-
 package com.anagram.project.mapper;
 
-import com.anagram.project.model.Word;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.cursor.Cursor;
 
-import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface AnagramMapper {
 
-    @Select("select id,value from words")
-    List<Word> findAll();
+    @Select("select distinct value_sort from words")
+    Cursor<String> scan();
 
-    @Select("select id,value from words")
-    Cursor<Word> scan();
-
+    @Select("select value from words where value_sort = #{value_sort}")
+    Set<String> findValueByValueSort(@Param("value_sort") String valueSort);
 }
-
